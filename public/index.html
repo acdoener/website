@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aachen Dönerliste</title>
+  <meta name="description" content="Welche Dönerbude in Aachen ist die beste? Stimm ab – ohne Konto, einmal pro Laden und Monat.">
+  <meta name="theme-color" content="#fff8ea">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="#/month" aria-label="Aachen Dönerliste">
+        <img src="/logo.png" alt="" width="56" height="56">
+        <span><strong>Aachen Dönerliste</strong><small data-i18n="tagline"></small></span>
+      </a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="de">DE</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Navigation">
+    <div class="wrap tabs-inner">
+      <a href="#/month" data-route="month" data-i18n="tab_month"></a>
+      <a href="#/year" data-route="year" data-i18n="tab_year"></a>
+      <a href="#/all" data-route="all" data-i18n="tab_all"></a>
+      <a href="#/history" data-route="history" data-i18n="tab_history"></a>
+      <a href="#/request" data-route="request" data-i18n="tab_request"></a>
+    </div>
+  </nav>
+
+  <main class="wrap" id="main" tabindex="-1"></main>
+
+  <footer class="foot">
+    <div class="wrap foot-grid">
+      <section>
+        <h2 data-i18n="how_title"></h2>
+        <ul id="how"></ul>
+      </section>
+      <section>
+        <h2 data-i18n="contact_title"></h2>
+        <p><a href="mailto:info@acdoener.de">info@acdoener.de</a></p>
+        <p><span data-i18n="missing"></span> <a href="#/request" data-i18n="missing_link"></a></p>
+        <p class="fine"><a href="#/privacy" data-i18n="privacy_link"></a></p>
+      </section>
+    </div>
+  </footer>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
