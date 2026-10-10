@@ -10,14 +10,14 @@ const I18N = {
     tagline: 'Die besten Döner der Kaiserstadt',
     tab_month: 'Monat', tab_year: 'Jahr', tab_all: 'Gesamt', tab_history: 'Historie', tab_request: 'Anfragen',
     h_month: (m) => `Ranking ${m}`, h_year: (y) => `Ranking ${y}`, h_all: 'Gesamtranking',
-    s_month: 'Startet am 1. jedes Monats neu – jetzt wieder abstimmen, wenn ein neuer Monat beginnt.',
+    s_month: 'Startet am 1. jedes Monats neu. Jetzt wieder abstimmen, wenn ein neuer Monat beginnt.',
     s_year: 'Summe aller Monatswertungen dieses Jahres. Deine Stimme gilt für den aktuellen Monat.',
     s_all: 'Summe aller Stimmen seit Beginn. Deine Stimme gilt für den aktuellen Monat.',
     search: 'Dönerladen oder Straße suchen …', shops: (n, t) => (n === t ? `${t} Läden` : `${n} von ${t} Läden`),
     none: 'Nichts gefunden. Fehlt ein Laden? Schick uns eine Anfrage.', loading: 'Lädt …', error: 'Konnte nicht geladen werden. Bitte später erneut versuchen.',
     up: (n) => `Hochwählen: ${n}`, down: (n) => `Runterwählen: ${n}`, website: 'Webseite',
     vote_err: 'Stimme konnte nicht gespeichert werden. Bitte nochmal versuchen.',
-    h_hist: 'Historie', s_hist: 'Die Top 5 jedes abgeschlossenen Monats und Jahres – nur lesbar.',
+    h_hist: 'Historie', s_hist: 'Die Top 5 jedes abgeschlossenen Monats und Jahres.',
     months: 'Monate', years: 'Jahre', hist_empty_m: 'Noch kein Monat abgeschlossen. Die ersten Sieger erscheinen nach dem Monatswechsel.',
     hist_empty_y: 'Noch kein Jahr abgeschlossen.', pts: (n) => `${n > 0 ? '+' : ''}${n}`,
     h_request: 'Anfragen', s_request: 'Dönerladen fehlt, falsche Adresse oder geschlossen? Gib uns Bescheid.',
@@ -29,21 +29,21 @@ const I18N = {
       'Monatsranking = Stimmen dieses Monats. Jahresranking = Summe der Monate. Gesamt = Summe aller Stimmen. Jede Stimme zählt für alle drei.',
     ],
     contact_title: 'Kontakt', missing: 'Laden fehlt oder stimmt etwas nicht?', missing_link: 'Zum Anfrageformular',
-    privacy: 'Datenschutz: Dein Gerät bekommt eine zufällige Geräte-ID (UUID), gespeichert als technisch nötiges Cookie und im lokalen Speicher. Auf dem Server liegt nur ein monatlich wechselnder Hash davon – keine IP-Adressen, keine Konten.',
+    privacy: 'Datenschutz: Dein Gerät bekommt eine zufällige Geräte-ID (UUID), gespeichert als technisch nötiges Cookie und im lokalen Speicher. Auf dem Server liegt nur ein monatlich wechselnder Hash davon. Keine IP-Adressen, keine Konten.',
     privacy_link: 'Datenschutzerklärung',
   },
   en: {
     tagline: 'The best döner of the Imperial City',
     tab_month: 'Month', tab_year: 'Year', tab_all: 'All time', tab_history: 'History', tab_request: 'Requests',
     h_month: (m) => `Ranking ${m}`, h_year: (y) => `Ranking ${y}`, h_all: 'All-time ranking',
-    s_month: 'Resets on the 1st of every month – vote again when a new month starts.',
+    s_month: 'Resets on the 1st of every month. Vote again when a new month starts.',
     s_year: "Sum of all monthly scores this year. Your vote counts for the current month.",
     s_all: 'Sum of all votes ever. Your vote counts for the current month.',
     search: 'Search döner shop or street …', shops: (n, t) => (n === t ? `${t} shops` : `${n} of ${t} shops`),
     none: 'Nothing found. Missing a shop? Send us a request.', loading: 'Loading …', error: 'Could not load. Please try again later.',
     up: (n) => `Upvote ${n}`, down: (n) => `Downvote ${n}`, website: 'Website',
     vote_err: 'Could not save your vote. Please try again.',
-    h_hist: 'History', s_hist: 'The top 5 of every finished month and year – read only.',
+    h_hist: 'History', s_hist: 'The top 5 of every finished month and year.',
     months: 'Months', years: 'Years', hist_empty_m: 'No month finished yet. The first winners appear after the month changes.',
     hist_empty_y: 'No year finished yet.', pts: (n) => `${n > 0 ? '+' : ''}${n}`,
     h_request: 'Requests', s_request: 'Shop missing, wrong address or closed? Let us know.',
@@ -55,7 +55,7 @@ const I18N = {
       'Monthly ranking = votes of this month. Yearly ranking = sum of the months. All time = sum of all votes. Each vote counts towards all three.',
     ],
     contact_title: 'Contact', missing: 'Shop missing or something wrong?', missing_link: 'Open the request form',
-    privacy: 'Privacy: your device gets a random device ID (UUID), kept as a strictly necessary cookie and in local storage. The server only stores a hash of it that changes every month – no IP addresses, no accounts.',
+    privacy: 'Privacy: your device gets a random device ID (UUID), kept as a strictly necessary cookie and in local storage. The server only stores a hash of it that changes every month. No IP addresses, no accounts.',
     privacy_link: 'Privacy Policy',
   },
 };
@@ -64,7 +64,7 @@ const I18N = {
 const PERIODS = ['month', 'year', 'all'];
 const ROUTES = [...PERIODS, 'history', 'request', 'privacy', 'datenschutz'];
 let lang = 'de';
-try { const s = localStorage.getItem('lang'); if (s === 'de' || s === 'en') lang = s; } catch {}
+try { const s = localStorage.getItem('lang'); if (s === 'de' || s === 'en') lang = s; } catch { }
 const t = (k, ...a) => { const v = I18N[lang][k]; return typeof v === 'function' ? v(...a) : v; };
 
 const data = { month: null, year: null, all: null, history: null };
@@ -99,14 +99,14 @@ function toast(msg) {
 
 // Random device UUID, kept in localStorage (and mirrored by the server in a cookie).
 let deviceId = null;
-try { deviceId = localStorage.getItem('deviceId'); } catch {}
-if (!deviceId) { deviceId = crypto.randomUUID(); try { localStorage.setItem('deviceId', deviceId); } catch {} }
+try { deviceId = localStorage.getItem('deviceId'); } catch { }
+if (!deviceId) { deviceId = crypto.randomUUID(); try { localStorage.setItem('deviceId', deviceId); } catch { } }
 
 async function api(path, opts = {}) {
   const res = await fetch(path, { cache: 'no-store', credentials: 'same-origin', ...opts, headers: { 'x-device-id': deviceId, ...(opts.headers || {}) } });
   if (!res.ok) throw new Error(String(res.status));
   const effective = res.headers.get('x-device-id');   // the server may know this device under its cookie id
-  if (effective && effective !== deviceId) { deviceId = effective; try { localStorage.setItem('deviceId', effective); } catch {} }
+  if (effective && effective !== deviceId) { deviceId = effective; try { localStorage.setItem('deviceId', effective); } catch { } }
   return res.json();
 }
 
@@ -350,7 +350,7 @@ function render() {
 
 window.addEventListener('hashchange', () => { query = ''; render(); window.scrollTo({ top: 0 }); });
 document.querySelectorAll('[data-lang]').forEach((b) => b.addEventListener('click', () => {
-  lang = b.dataset.lang; try { localStorage.setItem('lang', lang); } catch {}
+  lang = b.dataset.lang; try { localStorage.setItem('lang', lang); } catch { }
   applyStaticText(); render();
 }));
 
