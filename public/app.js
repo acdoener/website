@@ -33,7 +33,7 @@ const I18N = {
     privacy_link: 'Datenschutzerklärung',
   },
   en: {
-    tagline: 'The best döner of the Imperial City',
+    tagline: 'The best döner of the Kaiserstadt',
     tab_month: 'Month', tab_year: 'Year', tab_all: 'All time', tab_history: 'History', tab_request: 'Requests',
     h_month: (m) => `Ranking ${m}`, h_year: (y) => `Ranking ${y}`, h_all: 'All-time ranking',
     s_month: 'Resets on the 1st of every month. Vote again when a new month starts.',
